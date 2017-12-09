@@ -1,11 +1,7 @@
 <template>
     <div>
         <!-- 1.0 轮播图 -->
-        <mt-swipe :auto="3000">
-            <mt-swipe-item v-for="(item,index) in LunboArray" :key="index">
-                <img :src="item.img" alt="">
-            </mt-swipe-item>
-        </mt-swipe>
+        <swiper url="api/getlunbo" :time="3000"></swiper>
 
         <!--2.0九宫格-->
         <ul class="mui-table-view mui-grid-view mui-grid-9">
@@ -17,16 +13,16 @@
             </li>
 
             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-                <a href="#">
+                <router-link to="/photo/photolist">
                     <span class="mui-icon mui-icon-email"></span>
                     <div class="mui-media-body">图片分享</div>
-                </a>
+                </router-link>
             </li>
             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-                <a href="#">
+                <router-link to="/goods/goodslist">
                     <span class="mui-icon mui-icon-chatbubble"></span>
                     <div class="mui-media-body">商品购买</div>
-                </a>
+                </router-link>
             </li>
             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
                 <a href="#">
@@ -52,15 +48,7 @@
 
 
 <style scoped>
-    .mint-swipe {
-        height: 250px;
-        width: 100%;
-    }
-
-    img {
-        width: 100%;
-        height: 100%;
-    }
+    
 
     .mui-icon {
         width: 50px;
@@ -107,23 +95,28 @@
 </style>
 
 <script>
+    import swiper from '../subcomponent/swiper.vue'
+
     export default {
         data() {
             return {
-                LunboArray: []
+                // LunboArray: []
             }
         },
         created() {
-            this.getLunboArrayData()
+            // this.getLunboArrayData()
         },
         methods: {
-            getLunboArrayData() {
-                const url = "http://vue.studyit.io/api/getlunbo"
+            // getLunboArrayData() {
+            //     const url = "http://vue.studyit.io/api/getlunbo"
 
-                this.$http.get(url).then(response => {
-                    this.LunboArray = response.body.message
-                })
-            }
+            //     this.$http.get(url).then(response => {
+            //         this.LunboArray = response.body.message
+            //     })
+            // }
+        },
+        components:{
+            swiper
         }
     }
 </script>

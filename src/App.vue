@@ -21,7 +21,10 @@
           </router-link>
         </mt-tab-item>
         <mt-tab-item>
-          <img src="http://img08.jiuxian.com/bill/2016/0224/42baf46987b6460bb43b3396e9941653.png">
+          <router-link to="/shopcart">
+            <img src="http://img08.jiuxian.com/bill/2016/0224/42baf46987b6460bb43b3396e9941653.png">
+            <span v-show="this.badge" class="mui-badge">{{this.badge}}</span>
+          </router-link>
         </mt-tab-item>
         <mt-tab-item>
           <img src="http://img09.jiuxian.com/bill/2016/0224/cba9029a8f4444a989a2ab5aa84c6538.png">
@@ -53,14 +56,25 @@
     left:5px;
     font-size:14px;
   }
+
+   .mui-badge{
+    position: absolute;
+    top: 5px;
+    right: 120px;
+    background-color: red;
+    color: white;
+  }
 </style>
 
 <script>
+  import bus from './common/commonvue.js'
+
   export default{
     data(){
       return {
         isShowBack:false,
-        isShowTabBar:true
+        isShowTabBar:true,
+        badge:0
       }
     },
     methods:{
@@ -80,6 +94,9 @@
     },
     created:function(){
       this.toggle(this.$route.path);
+      bus.$on('getCount',(count)=>{
+        this.badge += count
+      })
     },
     watch:{
       $route(newvalue,old){
